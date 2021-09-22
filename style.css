@@ -1,0 +1,4 @@
+body{background-image:url('back.jpg') ;background-size: cover;}
+div{width:50%;padding: 10px; margin: auto;margin-top:10%;}
+p,a{font-size:20pt;}
+vreme{background-color:#aaddff;padding:5px;min-width:150px;font-family: 'Nova Mono', monospace;}
