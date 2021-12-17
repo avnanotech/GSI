@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GODISNJA DOBA</title>
+   <style type="text/css">
+     body{background-size:cover;}
+     span{font-size:48pt ;}
+     div{left:30%;top:15%;position:fixed;padding:5px;}
+     input{width: 100px;font-size: 48pt;}
+   </style>
+
+   <script type="text/javascript">
+   	var izabranDatum=null;
+    var glink=["https://www.youtube.com/embed/IXOuabNg4Bk","https://www.youtube.com/embed/e_i7ED3hz6s", 
+    "https://www.youtube.com/embed/l3AluKhU8GY","https://www.youtube.com/embed/79g6gzhV09Q"]
+   	function postavka(datvar) {
+      addlink="?autoplay=1&modestbranding=1";
+      if((datvar>=Date.UTC(2021,0,1)) && (datvar<Date.UTC(2021,2,19))){
+        document.body.style.backgroundImage="url('zima.jpg')";
+        document.getElementsByTagName("div")[0].style.backgroundColor="#aa99ff"
+        document.getElementsByTagName("iframe")[0].src=glink[0]+addlink;
+      }
+      else if((datvar>=Date.UTC(2021,2,20)) && (datvar<Date.UTC(2021,5,21))){
+        document.body.style.backgroundImage="url('prolece.jpg')";
+        document.getElementsByTagName("div")[0].style.backgroundColor="#99bb66"
+        document.getElementsByTagName("iframe")[0].src=glink[1]+addlink;
+      }
+      else if((datvar>=Date.UTC(2021,5,21)) && (datvar<Date.UTC(2021,8,23))){
+        document.body.style.backgroundImage="url('leto.jpg')";
+        document.getElementsByTagName("div")[0].style.backgroundColor="#99bb66"
+        document.getElementsByTagName("iframe")[0].src=glink[2]+addlink;
+      }
+      else if((datvar>=Date.UTC(2021,8,23)) && (datvar<Date.UTC(2021,11,21))){
+        document.body.style.backgroundImage="url('jesen.jpg')";
+        document.getElementsByTagName("div")[0].style.backgroundColor="#998844"
+        document.getElementsByTagName("iframe")[0].src=glink[3]+addlink;
+      }
+
+   	}
+
+    function danas(){
+      var sada = new Date();
+      var god= sada.getFullYear();
+      var ms = sada.getMonth(); 
+      var dd = sada.getDate();
+
+      var ddd = String(dd);
+      if (ddd.length==1)
+     	{
+     	  ddd="0"+ddd;
+     	}
+      document.getElementsByTagName("span")[0].innerHTML="Danas je <a>"+dd+"."+(ms+1)+"</a><input type=button id=dugme value='<>' onclick='promena(0)'>";
+	   return Date.UTC(god,ms,dd);
+    }
+    
+    function promena(id){
+      if(id==0){
+        document.getElementsByTagName("span")[0].innerHTML="Danas je <a><input type=text><input type=text></a><input type=button  id=dugme value='<>' onclick='promena(1)'>";
+      }
+      else{
+       let sldan=parseInt(document.getElementsByTagName("input")[0].value); 
+       let slmon=parseInt(document.getElementsByTagName("input")[1].value)-1;
+       if(slmon>=0 && slmon<=11){
+         if(sldan>=1 && sldan<=31){
+           if( ((slmon==2) || (slmon==5) || (slmon==8) ||(slmon==11)) && (sldan>30) ){
+            alert("Navedeni mesec ima 30 dana");
+            document.getElementsByTagName("input")[0].value=""
+            document.getElementsByTagName("input")[1].value=""
+           }
+           else if ((slmon==1)&& (sldan>28)) {
+            alert("Navedeni mesec ima 28 dana");
+            document.getElementsByTagName("input")[0].value=""
+            document.getElementsByTagName("input")[1].value=""
+           }
+           else{
+            document.getElementsByTagName("span")[0].innerHTML="Danas je <a>"+sldan+"."+(slmon+1)+". </a><input type=button id=dugme value='<>' onclick='promena(0)'>";
+            postavka(Date.UTC(2021,slmon,sldan));            
+           }
+         }
+         else{
+            alert("Navedeni mesec ima 31 dan");         
+            document.getElementsByTagName("input")[0].value=""
+            document.getElementsByTagName("input")[1].value=""
+         }  
+       }
+       else{
+         alert("Godina ima 12 meseci");      
+       }
+
+      }
+    }
+
+
+    function start() {
+      postavka(danas());
+    }
+   </script>
+</head>
+<body onload="start()">
+  <div><span></span><br>
+  <iframe width="660" height="375" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameborder="0"></iframe></div>
+  
+
+</body>
+</html>
